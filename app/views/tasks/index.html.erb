@@ -1,0 +1,28 @@
+<%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
+  <%= f.text_field :description, :placeholder => 'Description' %>
+
+  <%= f.text_field :duration, :placeholder => 'Duration' %>
+
+  <%= f.submit :class => 'btn btn-primary', :id => 'create-task' %>
+<% end %>
+
+<ul id="tasks">
+  <% @tasks.each_with_index do |task, i| %>
+    <li class="task <%= i % 2 == 0 ? 'even' : 'odd' %>">
+      <span class="description">
+        <%= task.description %>
+      </span>
+      <span class="duration">
+        <%= task.formatted_duration %>
+      </span>
+      <span class="actions">
+        <%= link_to 'Delete', task, :method => :delete %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<script type="text/javascript">
+  Tasks = new TaskList();
+  Tasks.reset(<%= raw @tasks.to_json %>);
+</script>
