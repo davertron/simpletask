@@ -1,3 +1,3 @@
-= Time Track
+# Time Track
 
-== Simple Time Tracking
+## Simple Time Tracking
