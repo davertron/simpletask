@@ -56,4 +56,29 @@ class TasksController < ApplicationController
       end
     end
   end
+
+  def update
+    @task = Task.find(params[:id])
+    if @task.update_attributes(params[:task])
+      respond_to do |format|
+        format.html {
+          redirect_to @task
+        }
+
+        format.json {
+          head :ok
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to @task
+        }
+
+        format.json {
+          head :bad_request
+        }
+      end
+    end
+  end
 end

@@ -4,7 +4,6 @@ window.Task = Backbone.Model.extend({
     defaults: ->
         {
             description: '',
-            duration: 0,
             time_entries: []
         }
 
