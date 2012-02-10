@@ -16,13 +16,30 @@
         <%= task.formatted_duration %>
       </span>
       <span class="actions">
-        <%= link_to 'Delete', task, :method => :delete %>
+        <%= link_to 'Delete', task, :method => :delete, :class => 'delete-link' %>
       </span>
     </li>
   <% end %>
 </ul>
 
+<script type="text/html" id="task-template">
+    <li class="task">
+      <span class="description">
+        {{= description }}
+      </span>
+      <span class="duration">
+        <!-- TODO: Create formatted duration on model -->
+        {{= formatted_duration }}
+      </span>
+      <span class="actions">
+        <!-- TODO: Figure out how to do the link -->
+      </span>
+    </li>
+</script>
+
 <script type="text/javascript">
   Tasks = new TaskList();
   Tasks.reset(<%= raw @tasks.to_json %>);
+  AppView = new TasksView({el: $('body'), collection: Tasks});
+  AppView.render();
 </script>
