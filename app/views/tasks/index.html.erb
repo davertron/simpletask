@@ -1,19 +1,21 @@
-<%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
-  <%= f.text_field :description, :placeholder => 'Description' %>
+<div id="form-wrapper">
+  <%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
+    <%= f.text_field :description, :placeholder => 'Description' %>
 
-  <%= f.text_field :duration, :placeholder => 'Duration' %>
+    <%= f.text_field :duration, :placeholder => 'Duration' %>
 
-  <%= f.submit :class => 'btn btn-primary', :id => 'create-task' %>
-<% end %>
+    <%= f.submit :class => 'btn btn-primary', :id => 'create-task' %>
+  <% end %>
+</div>
 
 <ul id="tasks">
   <% @tasks.each_with_index do |task, i| %>
-    <li class="task <%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <li class="task <%= 'even' if i % 2 == 0 %>">
       <span class="description">
         <%= task.description %>
       </span>
       <span class="duration">
-        <%= task.formatted_duration %>
+        <%= task.duration %> seconds
       </span>
       <span class="actions">
         <%= link_to 'Delete', task, :method => :delete, :class => 'delete-link' %>
@@ -23,23 +25,24 @@
 </ul>
 
 <script type="text/html" id="task-template">
-    <li class="task">
-      <span class="description">
-        {{= description }}
-      </span>
-      <span class="duration">
-        <!-- TODO: Create formatted duration on model -->
-        {{= formatted_duration }}
-      </span>
-      <span class="actions">
-        <!-- TODO: Figure out how to do the link -->
-      </span>
-    </li>
+    <span class="description">
+      {{= description }}
+    </span>
+    <span class="duration">
+      {{= duration }} seconds
+    </span>
+    <div class="btn-group actions">
+      <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Actions<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#" class="delete-link">Delete</a></li>
+        <li><a href="#" class="log-link">Log Time</a></li>
+      </ul>
+    </div>
 </script>
 
 <script type="text/javascript">
   Tasks = new TaskList();
-  Tasks.reset(<%= raw @tasks.to_json %>);
+  Tasks.reset(<%= raw @tasks.to_json(:methods => :duration_in_words) %>);
   AppView = new TasksView({el: $('body'), collection: Tasks});
   AppView.render();
 </script>

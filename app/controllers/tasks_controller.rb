@@ -2,6 +2,11 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @task = Task.new
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @tasks.to_json(:methods => :duration_in_words) }
+    end
   end
 
   def create

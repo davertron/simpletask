@@ -1,8 +1,10 @@
 window.TaskView = Backbone.View.extend({
     tagName: 'li',
+    className: 'task',
 
     events: {
-        'click .delete-link': 'remove'
+        'click .delete-link': 'delete',
+        'click .log-link': 'log'
     },
 
     initialize: ->
@@ -14,8 +16,13 @@ window.TaskView = Backbone.View.extend({
         $(this.el).html(this.template(this.model.toJSON()))
         this
 
+    log: ->
+
+    delete: ->
+        this.model.destroy()
+        return false
+
     remove: ->
-        alert('wow!')
         $(this.el).remove()
 })
 
@@ -28,19 +35,27 @@ window.TasksView = Backbone.View.extend({
         this.description = $ '#task_description'
         this.duration = $ '#task_duration'
 
+        this.duration.hide()
+
         this.collection.bind 'add', this.addOne, this
 
     render: ->
+        $('#tasks').html ''
+        this.collection.forEach (task) =>
+            this.addOne task
 
     addTask: ->
-        this.collection.create {description: this.description.val(), duration: this.duration.val()}
-        this.description.val(null)
-        this.duration.val(null)
+        description = this.description.val()
+        duration = this.duration.val()
+        this.collection.create {description: description, duration: if duration == '' then 0 else duration}
+        this.description.val('')
+        this.duration.val('')
 
         return false
 
     addOne: (task) ->
         view = new TaskView {model: task}
-        console.log view.render().el
-        $('#tasks').append view.render().el
+        html = view.render().el
+        $('#tasks').append html
+
 })

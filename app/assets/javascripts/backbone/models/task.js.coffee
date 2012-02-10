@@ -5,11 +5,10 @@ window.Task = Backbone.Model.extend({
         {
             description: '',
             duration: 0,
-            formatted_duration: '00:00:00'
-            id: null
+            time_entries: []
         }
 
     url: ->
-        if this.id then '/tasks' + this.id else '/tasks'
+        if this.id then '/tasks/' + this.id else '/tasks'
 
 })

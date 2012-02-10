@@ -1,5 +1,5 @@
 window.TaskList = Backbone.Collection.extend({
     model: Task,
-    url: '/tasks'
+    url: '/tasks.json'
 })
 

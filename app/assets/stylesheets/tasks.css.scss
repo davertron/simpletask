@@ -1,3 +1,44 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#form-wrapper {
+  width: 80%;
+  margin: auto;
+}
+
+#tasks {
+  width: 80%;
+  margin: auto;
+
+  $task-bottom: 30px;
+  $task-top: 10px;
+  $task-right: 10px;
+  .task {
+    height: 50px;
+    list-style: none;
+    padding: $task-top $task-right $task-bottom 10px;
+    position: relative;
+
+    &:nth-child(odd) {
+      background-color: #efefef;
+    }
+
+    .description {
+      font-weight: bold;
+      font-size: 150%;
+    }
+
+    .duration {
+      position: absolute;
+      top: $task-top;
+      right: $task-right;
+    }
+
+    .actions {
+      position: absolute;
+      bottom: $task-bottom;
+      right: $task-right;
+    }
+  }
+}
