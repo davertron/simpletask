@@ -1,7 +1,9 @@
 Timetrack::Application.routes.draw do
   root :to => 'tasks#index'
 
-  resources :tasks
+  resources :tasks do
+    resources :time_entries
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

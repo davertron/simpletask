@@ -15,8 +15,6 @@ window.TaskView = Backbone.View.extend({
             !entry.endDate
         )
 
-        console.log(this.isLogging)
-
         if this.isLogging
             console.log "I'm loggin' already bro"
         else
@@ -45,11 +43,11 @@ window.TaskView = Backbone.View.extend({
             entry = _.find(this.model.get('time_entries'), (entry) ->
                 !entry.endDate
             )
-            entry.endDate = new Date()
+            entry.endDate = (new Date()).toISOString()
             this.model.save()
             console.log "I will stop logging"
         else
-            this.model.get('time_entries').push(new TimeEntry({startDate: new Date()}))
+            this.model.get('time_entries').push({startDate: (new Date()).toISOString()})
             this.model.save()
             console.log "I will start logging time"
 

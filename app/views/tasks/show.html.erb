@@ -1,0 +1,8 @@
+<h1><%= @task.description %></h1>
+
+<h2>Time Entries</h2>
+<ul>
+  <% @task.time_entries.each do |entry| %>
+    <li>Start: <%= entry.startDate %>, End: <%= entry.endDate %></li>
+  <% end %>
+</ul>

@@ -3,6 +3,6 @@ class TimeEntry
 
   belongs_to :task
 
-  key :startDate, Date
-  key :endDate, Date
+  key :startDate, Time
+  key :endDate, Time
 end
