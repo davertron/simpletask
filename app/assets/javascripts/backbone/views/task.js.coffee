@@ -94,10 +94,14 @@ window.TaskView = Backbone.View.extend({
 
         text
 
+    getLogButtonClass: ->
+        return if this.isLogging then 'btn-danger' else 'btn-success'
+
     render: ->
         model_obj = this.model.toJSON()
         model_obj.duration = this.formatDuration(this.getDuration())
         model_obj.logButtonText = this.getLogButtonText()
+        model_obj.logButtonClass = this.getLogButtonClass()
         $(this.el).html(this.template(model_obj))
         this
 
@@ -112,6 +116,7 @@ window.TaskView = Backbone.View.extend({
 
         this.isLogging = !this.isLogging
         $('.log-button-text').html this.getLogButtonText()
+        $('.btn.log-link').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
         this.model.save()
 
         true
