@@ -15,14 +15,64 @@ window.TaskView = Backbone.View.extend({
             !entry.endDate
         )
 
-        if this.isLogging
-            console.log "I'm loggin' already bro"
-        else
-            console.log "Currently not loggin' bro"
+        _.bindAll(this)
 
-    render: ->
-        model_obj = this.model.toJSON()
-        model_obj.duration = _.reduce(this.model.get('time_entries'), (acc, entry) ->
+        this.updateDuration()
+
+    updateDuration: ->
+        if this.isLogging
+            $('.duration').html(this.formatDuration(this.getDuration()))
+        setTimeout this.updateDuration, 1000
+
+    formatDuration: (seconds) ->
+        result = {days: 0, hours: 0, minutes: 0, seconds: 0}
+
+        if seconds > 86400
+            result.days = parseInt(seconds / 86400, 10)
+            seconds = seconds % 86400
+
+        if seconds > 3600
+            result.hours = parseInt(seconds / 3600, 10) 
+            seconds = seconds % 3600
+
+        if seconds > 60
+            result.minutes = parseInt(seconds / 60, 10) 
+            seconds = seconds % 60
+
+        if seconds > 0
+            result.seconds = seconds
+
+        duration_string = ''
+
+        if result.days > 0
+            if result.days > 1
+                duration_string += result.days + ' days '
+            else
+                duration_string += result.days + ' day '
+
+        if result.hours > 0
+            if result.hours > 1
+                duration_string += result.hours + ' hours '
+            else
+                duration_string += result.hours + ' hour '
+
+        if result.minutes > 0
+            if result.minutes > 1
+                duration_string += result.minutes + ' minutes '
+            else
+                duration_string += result.minutes + ' minute '
+
+        if result.seconds > 0
+            if result.seconds > 1
+                duration_string += result.seconds + ' seconds'
+            else
+                duration_string += result.seconds + ' second'
+
+        return duration_string
+
+
+    getDuration: ->
+        duration = parseInt(_.reduce(this.model.get('time_entries'), (acc, entry) ->
             if entry.startDate and entry.endDate
                 start = new Date entry.startDate
                 end = new Date entry.endDate
@@ -33,8 +83,21 @@ window.TaskView = Backbone.View.extend({
                 end = new Date()
 
                 acc += (end - start) / 1000
-        , 0)
+        , 0), 10)
 
+    getLogButtonText: ->
+        text
+        if this.isLogging
+            text = 'Stop'
+        else
+            text = 'Log'
+
+        text
+
+    render: ->
+        model_obj = this.model.toJSON()
+        model_obj.duration = this.formatDuration(this.getDuration())
+        model_obj.logButtonText = this.getLogButtonText()
         $(this.el).html(this.template(model_obj))
         this
 
@@ -44,14 +107,12 @@ window.TaskView = Backbone.View.extend({
                 !entry.endDate
             )
             entry.endDate = (new Date()).toISOString()
-            this.model.save()
-            console.log "I will stop logging"
         else
             this.model.get('time_entries').push({startDate: (new Date()).toISOString()})
-            this.model.save()
-            console.log "I will start logging time"
 
         this.isLogging = !this.isLogging
+        $('.log-button-text').html this.getLogButtonText()
+        this.model.save()
 
         true
 
