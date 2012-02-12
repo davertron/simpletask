@@ -21,7 +21,8 @@ window.TaskView = Backbone.View.extend({
 
     updateDuration: ->
         if this.isLogging
-            $('.duration').html(this.formatDuration(this.getDuration()))
+            $('.duration').html(this.formatDuration(this.getDuration()) + ' total')
+            $('.duration-today').html(this.formatDuration(this.getDurationToday()) + ' today')
         setTimeout this.updateDuration, 1000
 
     formatDuration: (seconds) ->
@@ -68,6 +69,9 @@ window.TaskView = Backbone.View.extend({
             else
                 duration_string += result.seconds + ' second'
 
+        if duration_string == ''
+            duration_string = 'No time logged'
+
         return duration_string
 
 
@@ -76,13 +80,29 @@ window.TaskView = Backbone.View.extend({
             if entry.startDate and entry.endDate
                 start = new Date entry.startDate
                 end = new Date entry.endDate
-
-                acc += (end - start) / 1000
             else
                 start = new Date entry.startDate
                 end = new Date()
 
+            acc += (end - start) / 1000
+        , 0), 10)
+
+    getDurationToday: ->
+        duration = parseInt(_.reduce(this.model.get('time_entries'), (acc, entry) ->
+            today = new Date()
+            start = new Date entry.startDate
+            if start.getDate() == today.getDate() and
+               start.getFullYear() == today.getFullYear() and
+               start.getMonth() == today.getMonth()
+                if entry.startDate and entry.endDate
+                    start = new Date entry.startDate
+                    end = new Date entry.endDate
+                else
+                    start = new Date entry.startDate
+                    end = new Date()
+
                 acc += (end - start) / 1000
+            acc
         , 0), 10)
 
     getLogButtonText: ->
@@ -99,7 +119,8 @@ window.TaskView = Backbone.View.extend({
 
     render: ->
         model_obj = this.model.toJSON()
-        model_obj.duration = this.formatDuration(this.getDuration())
+        model_obj.duration = this.formatDuration(this.getDuration()) + ' total'
+        model_obj.duration_today = this.formatDuration(this.getDurationToday()) + ' today'
         model_obj.logButtonText = this.getLogButtonText()
         model_obj.logButtonClass = this.getLogButtonClass()
         $(this.el).html(this.template(model_obj))

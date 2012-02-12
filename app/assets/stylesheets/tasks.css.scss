@@ -15,7 +15,7 @@
   $task-top: 10px;
   $task-right: 10px;
   .task {
-    height: 50px;
+    height: 80px;
     list-style: none;
     padding: $task-top $task-right $task-bottom 10px;
     position: relative;
@@ -30,6 +30,12 @@
     }
 
     .duration {
+      position: absolute;
+      top: $task-top + 20px;
+      right: $task-right;
+    }
+
+    .duration-today {
       position: absolute;
       top: $task-top;
       right: $task-right;
