@@ -17,7 +17,7 @@ class TasksController < ApplicationController
         }
 
         format.json {
-          head :ok
+          render :json => @task
         }
       end
     else

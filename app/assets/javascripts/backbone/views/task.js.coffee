@@ -21,8 +21,8 @@ window.TaskView = Backbone.View.extend({
 
     updateDuration: ->
         if this.isLogging
-            $('.duration').html(this.formatDuration(this.getDuration()) + ' total')
-            $('.duration-today').html(this.formatDuration(this.getDurationToday()) + ' today')
+            this.$('.duration').html(this.formatDuration(this.getDuration()) + ' total')
+            this.$('.duration-today').html(this.formatDuration(this.getDurationToday()) + ' today')
         setTimeout this.updateDuration, 1000
 
     formatDuration: (seconds) ->
@@ -136,8 +136,8 @@ window.TaskView = Backbone.View.extend({
             this.model.get('time_entries').push({startDate: (new Date()).toISOString()})
 
         this.isLogging = !this.isLogging
-        $('.log-button-text').html this.getLogButtonText()
-        $('.btn.log-link').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
+        this.$('.log-button-text').html this.getLogButtonText()
+        this.$('.btn.log-link').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
         this.model.save()
 
         true
@@ -174,6 +174,7 @@ window.TasksView = Backbone.View.extend({
         return false
 
     addOne: (task) ->
+        console.log 'addOne'
         view = new TaskView {model: task}
         html = view.render().el
         $('#tasks').append html
