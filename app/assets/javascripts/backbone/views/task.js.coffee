@@ -23,10 +23,10 @@ window.TaskView = Backbone.View.extend
         if this.isLogging
             this.$('.duration').html(this.formatDuration(this.model.getDuration()) + ' total')
             this.$('.duration-today').html(this.formatDuration(this.model.getDurationToday()) + ' today')
-        setTimeout this.updateDuration, 1000
+        setTimeout this.updateDuration, 10000
 
     formatDuration: (seconds) ->
-        result = {days: 0, hours: 0, minutes: 0, seconds: 0}
+        result = {days: 0, hours: 0, minutes: 0}
 
         if seconds > 86400
             result.days = parseInt(seconds / 86400, 10)
@@ -39,9 +39,6 @@ window.TaskView = Backbone.View.extend
         if seconds > 60
             result.minutes = parseInt(seconds / 60, 10) 
             seconds = seconds % 60
-
-        if seconds > 0
-            result.seconds = seconds
 
         duration_string = ''
 
@@ -62,12 +59,6 @@ window.TaskView = Backbone.View.extend
                 duration_string += result.minutes + ' minutes '
             else
                 duration_string += result.minutes + ' minute '
-
-        if result.seconds > 0
-            if result.seconds > 1
-                duration_string += result.seconds + ' seconds'
-            else
-                duration_string += result.seconds + ' second'
 
         if duration_string == ''
             duration_string = 'No time logged'
