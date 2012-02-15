@@ -4,10 +4,12 @@ window.TaskView = Backbone.View.extend
 
     events:
         'click .delete-link': 'delete',
+        'click .archive-link': 'archive',
         'click .log-link': 'log'
         'click .toggle-time-entries': 'toggleTimeEntries'
 
     initialize: ->
+        this.parent = this.options.parent
         this.template =  _.template($('#task-template').html())
         this.model.bind 'change', this.render, this
         this.model.bind 'destroy', this.remove, this
@@ -117,6 +119,12 @@ window.TaskView = Backbone.View.extend
         this.model.destroy()
         return false
 
+    archive: ->
+        this.model.set({archived: true})
+        this.model.save()
+        this.parent.collection.remove this.model
+        this.parent.render()
+
     remove: ->
         $(this.el).remove()
 
@@ -146,6 +154,6 @@ window.TasksView = Backbone.View.extend
         return false
 
     addOne: (task) ->
-        view = new TaskView {model: task}
+        view = new TaskView {model: task, parent: this}
         html = view.render().el
         $('#tasks').append html

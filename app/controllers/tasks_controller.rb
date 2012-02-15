@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.where(:archived => false)
     @task = Task.new
 
     respond_to do |format|

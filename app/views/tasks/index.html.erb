@@ -2,8 +2,6 @@
   <%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
     <%= f.text_field :description, :placeholder => 'Description' %>
 
-    <%= f.text_field :duration, :placeholder => 'Duration' %>
-
     <%= f.submit :class => 'btn btn-primary', :id => 'create-task' %>
   <% end %>
 </div>
@@ -13,9 +11,6 @@
     <li class="task <%= 'even' if i % 2 == 0 %>">
       <span class="description">
         <%= task.description %>
-      </span>
-      <span class="duration">
-        <%= task.duration %> seconds
       </span>
       <span class="actions">
         <%= link_to 'Delete', task, :method => :delete, :class => 'delete-link' %>
@@ -42,6 +37,7 @@
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
+        <li><a href="#" class="archive-link"><i class="icon-inbox"></i>&nbsp;Archive</a></li>
         <li><a href="#" class="delete-link"><i class="icon-remove"></i>&nbsp;Delete</a></li>
       </ul>
     </div>
