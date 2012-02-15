@@ -25,21 +25,62 @@
 </ul>
 
 <script type="text/html" id="task-template">
-    <span class="description">
+    <div class="description">
       {{= description }}
-    </span>
-    <span class="duration">
-      {{= duration }}
-    </span>
-    <span class="duration-today">
+    </div>
+    <div class="duration-today">
       {{= duration_today }}
-    </span>
-    <div class="actions">
-      <a href="#" class="btn log-link {{= logButtonClass }}">
+    </div>
+    <div class="duration">
+      {{= duration }}
+    </div>
+    <div class="actions btn-group">
+      <a href="#" class="btn btn-small log-link {{= logButtonClass }}">
         <i class="icon-time"></i>&nbsp;<span class="log-button-text">{{= logButtonText }}</span>
       </a>
-      <a href="#" class="btn delete-link"><i class="icon-remove"></i>&nbsp;Delete</a>
+      <a href="#" class="btn btn-small log-link-drop {{= logButtonClass }} dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" class="delete-link"><i class="icon-remove"></i>&nbsp;Delete</a></li>
+      </ul>
     </div>
+    <div>
+      <a href="#" class="toggle-time-entries">Time Entries</a>
+      <ul class="time-entries"></ul>
+    </div>
+</script>
+
+<script type="text/html" id="time-entry-template">
+    <li class="time-entry">
+      Start: {{= startDate }}
+      {{ if(endDate){ }}
+        End: {{= endDate }}
+        <a href="#" class="edit-entry">Edit</a>
+        <a href="#" class="delete-entry">Delete</a>
+      {{ } }}
+    </li>
+</script>
+
+<script type="text/html" id="time-entry-edit-template">
+    <li class="time-entry">
+      Start: 
+        <input type="text" value="{{= startDate.month }}" size="2" maxlength="2" style="width: auto" class="edit-start-month" />
+        <input type="text" value="{{= startDate.day }}"  size="2" maxlength="2" style="width: auto" class="edit-start-day" />
+        <input type="text" value="{{= startDate.year }}" size="4" maxlength="4" style="width: auto"  class="edit-start-year" />
+        <input type="text" value="{{= startDate.hour }}" size="2" maxlength="2" style="width: auto"  class="edit-start-hour" />
+        <input type="text" value="{{= startDate.minute }}" size="2" maxlength="2" style="width: auto"  class="edit-start-minute" />
+        <input type="text" value="{{= startDate.second }}" size="2" maxlength="2" style="width: auto"  class="edit-start-second" />
+      End:
+        <input type="text" value="{{= endDate.month }}" size="2" maxlength="2" style="width: auto"  class="edit-end-month" />
+        <input type="text" value="{{= endDate.day }}" size="2" maxlength="2" style="width: auto"  class="edit-end-day" />
+        <input type="text" value="{{= endDate.year }}" size="4" maxlength="4" style="width: auto"  class="edit-end-year" />
+        <input type="text" value="{{= endDate.hour }}" size="2" maxlength="2" style="width: auto"  class="edit-end-hour" />
+        <input type="text" value="{{= endDate.minute }}" size="2" maxlength="2" style="width: auto"  class="edit-end-minute" />
+        <input type="text" value="{{= endDate.second }}" size="2" maxlength="2" style="width: auto"  class="edit-end-second" />
+      <a href="#" class="save-edit-entry">Save</a>
+      <a href="#" class="cancel-edit-entry">Cancel</a>
+    </li>
 </script>
 
 <script type="text/javascript">

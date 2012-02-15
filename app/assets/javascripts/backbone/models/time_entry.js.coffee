@@ -1,9 +1,7 @@
-window.TimeEntry = Backbone.Model.extend({
+window.TimeEntry = Backbone.Model.extend
     initialize: ->
 
     defaults: ->
-        {
-            startDate: new Date(),
+        d =
+            startDate: new Date()
             endDate: null
-        }
-})

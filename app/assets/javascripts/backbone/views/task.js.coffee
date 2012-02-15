@@ -1,11 +1,11 @@
-window.TaskView = Backbone.View.extend({
-    tagName: 'li',
-    className: 'task',
+window.TaskView = Backbone.View.extend
+    tagName: 'li'
+    className: 'task'
 
-    events: {
+    events:
         'click .delete-link': 'delete',
         'click .log-link': 'log'
-    },
+        'click .toggle-time-entries': 'toggleTimeEntries'
 
     initialize: ->
         this.template =  _.template($('#task-template').html())
@@ -21,8 +21,8 @@ window.TaskView = Backbone.View.extend({
 
     updateDuration: ->
         if this.isLogging
-            this.$('.duration').html(this.formatDuration(this.getDuration()) + ' total')
-            this.$('.duration-today').html(this.formatDuration(this.getDurationToday()) + ' today')
+            this.$('.duration').html(this.formatDuration(this.model.getDuration()) + ' total')
+            this.$('.duration-today').html(this.formatDuration(this.model.getDurationToday()) + ' today')
         setTimeout this.updateDuration, 1000
 
     formatDuration: (seconds) ->
@@ -74,37 +74,6 @@ window.TaskView = Backbone.View.extend({
 
         return duration_string
 
-
-    getDuration: ->
-        duration = parseInt(_.reduce(this.model.get('time_entries'), (acc, entry) ->
-            if entry.startDate and entry.endDate
-                start = new Date entry.startDate
-                end = new Date entry.endDate
-            else
-                start = new Date entry.startDate
-                end = new Date()
-
-            acc += (end - start) / 1000
-        , 0), 10)
-
-    getDurationToday: ->
-        duration = parseInt(_.reduce(this.model.get('time_entries'), (acc, entry) ->
-            today = new Date()
-            start = new Date entry.startDate
-            if start.getDate() == today.getDate() and
-               start.getFullYear() == today.getFullYear() and
-               start.getMonth() == today.getMonth()
-                if entry.startDate and entry.endDate
-                    start = new Date entry.startDate
-                    end = new Date entry.endDate
-                else
-                    start = new Date entry.startDate
-                    end = new Date()
-
-                acc += (end - start) / 1000
-            acc
-        , 0), 10)
-
     getLogButtonText: ->
         text
         if this.isLogging
@@ -117,14 +86,24 @@ window.TaskView = Backbone.View.extend({
     getLogButtonClass: ->
         return if this.isLogging then 'btn-danger' else 'btn-success'
 
+    renderTimeEntries: ->
+        self = this
+        self.$('.time-entries').html ''
+        _.each(self.model.get('time_entries'), (entry) ->
+            tView = new TimeEntryView({model: entry, parent: self})
+            self.$('.time-entries').append tView.render().el
+        )
+
     render: ->
-        model_obj = this.model.toJSON()
-        model_obj.duration = this.formatDuration(this.getDuration()) + ' total'
-        model_obj.duration_today = this.formatDuration(this.getDurationToday()) + ' today'
-        model_obj.logButtonText = this.getLogButtonText()
-        model_obj.logButtonClass = this.getLogButtonClass()
-        $(this.el).html(this.template(model_obj))
-        this
+        self = this
+        model_obj = self.model.toJSON()
+        model_obj.duration = self.formatDuration(self.model.getDuration()) + ' total'
+        model_obj.duration_today = self.formatDuration(self.model.getDurationToday()) + ' today'
+        model_obj.logButtonText = self.getLogButtonText()
+        model_obj.logButtonClass = self.getLogButtonClass()
+        $(self.el).html(self.template(model_obj))
+        self.renderTimeEntries()
+        self
 
     log: ->
         if this.isLogging
@@ -137,8 +116,9 @@ window.TaskView = Backbone.View.extend({
 
         this.isLogging = !this.isLogging
         this.$('.log-button-text').html this.getLogButtonText()
-        this.$('.btn.log-link').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
+        this.$('.btn.log-link, .btn.log-link-drop').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
         this.model.save()
+        this.renderTimeEntries()
 
         true
 
@@ -148,12 +128,13 @@ window.TaskView = Backbone.View.extend({
 
     remove: ->
         $(this.el).remove()
-})
 
-window.TasksView = Backbone.View.extend({
-    events: {
+    toggleTimeEntries: ->
+        this.$('.time-entries').toggle()
+
+window.TasksView = Backbone.View.extend
+    events:
         'click #create-task': 'addTask'
-    },
 
     initialize: ->
         this.description = $ '#task_description'
@@ -174,9 +155,6 @@ window.TasksView = Backbone.View.extend({
         return false
 
     addOne: (task) ->
-        console.log 'addOne'
         view = new TaskView {model: task}
         html = view.render().el
         $('#tasks').append html
-
-})

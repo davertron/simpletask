@@ -11,13 +11,11 @@
   width: 80%;
   margin: auto;
 
-  $task-bottom: 30px;
-  $task-top: 10px;
-  $task-right: 10px;
+  $task-padding: 10px;
   .task {
-    height: 80px;
+    min-height: 80px;
     list-style: none;
-    padding: $task-top $task-right $task-bottom 10px;
+    padding: $task-padding;
     position: relative;
 
     &:nth-child(odd) {
@@ -26,25 +24,22 @@
 
     .description {
       font-weight: bold;
-      font-size: 150%;
-    }
-
-    .duration {
-      position: absolute;
-      top: $task-top + 20px;
-      right: $task-right;
-    }
-
-    .duration-today {
-      position: absolute;
-      top: $task-top;
-      right: $task-right;
+      font-size: 120%;
+      margin-bottom: 10px;
     }
 
     .actions {
       position: absolute;
-      bottom: $task-bottom;
-      right: $task-right;
+      top: $task-padding;
+      right: $task-padding;
+    }
+
+    .time-entries {
+      display: none;
+
+      li {
+        list-style: none;
+      }
     }
   }
 }
