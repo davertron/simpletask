@@ -81,6 +81,6 @@
 
 <script type="text/javascript">
   Tasks = new TaskList(<%= raw @tasks.to_json %>);
-  AppView = new TasksView({el: $('body'), collection: Tasks});
+  AppView = new TasksView({el: $('body'), collection: Tasks, showArchived: <%= @showArchived %>});
   AppView.render();
 </script>

@@ -137,6 +137,7 @@ window.TasksView = Backbone.View.extend
 
     initialize: ->
         this.description = $ '#task_description'
+        this.showArchived = this.options.showArchived or false
         $('#task_duration').hide()
 
         this.collection.bind 'add', this.addOne, this
@@ -144,7 +145,8 @@ window.TasksView = Backbone.View.extend
     render: ->
         $('#tasks').html ''
         this.collection.forEach (task) =>
-            this.addOne task
+            if this.showArchived or not task.get 'archived'
+                this.addOne task
 
     addTask: ->
         description = this.description.val()

@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.where(:archived => false)
+    @tasks = Task.all
     @task = Task.new
+    @showArchived = if params[:show_archived] then true else false end
 
     respond_to do |format|
       format.html
