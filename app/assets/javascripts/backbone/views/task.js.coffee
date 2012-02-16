@@ -5,6 +5,7 @@ window.TaskView = Backbone.View.extend
     events:
         'click .delete-link': 'delete',
         'click .archive-link': 'archive',
+        'click .unarchive-link': 'unarchive',
         'click .log-link': 'log'
         'click .toggle-time-entries': 'toggleTimeEntries'
 
@@ -122,8 +123,16 @@ window.TaskView = Backbone.View.extend
     archive: ->
         this.model.set({archived: true})
         this.model.save()
-        this.parent.collection.remove this.model
         this.parent.render()
+
+        return false
+
+    unarchive: ->
+        this.model.set({archived: false})
+        this.model.save()
+        this.parent.render()
+
+        return false
 
     remove: ->
         $(this.el).remove()
