@@ -143,6 +143,7 @@ window.TaskView = Backbone.View.extend
 window.TasksView = Backbone.View.extend
     events:
         'click #create-task': 'addTask'
+        'click #toggle-archived-visibility': 'toggleArchived'
 
     initialize: ->
         this.description = $ '#task_description'
@@ -153,6 +154,11 @@ window.TasksView = Backbone.View.extend
 
     render: ->
         $('#tasks').html ''
+        if this.showArchived
+            $('#toggle-archived-visibility').html('Hide Archived Tasks')
+        else
+            $('#toggle-archived-visibility').html('Show Archived Tasks')
+
         this.collection.forEach (task) =>
             if this.showArchived or not task.get 'archived'
                 this.addOne task
@@ -168,3 +174,7 @@ window.TasksView = Backbone.View.extend
         view = new TaskView {model: task, parent: this}
         html = view.render().el
         $('#tasks').append html
+
+    toggleArchived: ->
+        this.showArchived = !this.showArchived
+        this.render()

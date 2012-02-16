@@ -43,3 +43,13 @@
     }
   }
 }
+
+.container {
+  position: relative;
+}
+
+#toggle-archived-visibility {
+  position: absolute;
+  right: 100px;
+  top: 20px;
+}

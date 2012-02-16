@@ -6,6 +6,8 @@
   <% end %>
 </div>
 
+<a id="toggle-archived-visibility" href="#"><% if @showArchived %>Hide<% else %>Show<% end %> Archived Tasks</a>
+
 <ul id="tasks">
   <% @tasks.each_with_index do |task, i| %>
     <li class="task <%= 'even' if i % 2 == 0 %>">
