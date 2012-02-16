@@ -11,34 +11,34 @@
   width: 80%;
   margin: auto;
 
-  $task-padding: 10px;
   .task {
     min-height: 80px;
     list-style: none;
-    padding: $task-padding;
+    padding: 10px 5px;
     position: relative;
-
-    &:nth-child(odd) {
-      background-color: #efefef;
-    }
 
     .description {
       font-weight: bold;
       font-size: 120%;
-      margin-bottom: 10px;
+      background-color: #efefef;
+      padding: 12px 10px;
+
+      .actions {
+        float: right;
+        margin-top: -5px;
+      }
     }
 
-    .actions {
-      position: absolute;
-      top: $task-padding;
-      right: $task-padding;
-    }
+    .task-body {
+      background-color: white;
+      padding: 10px;
 
-    .time-entries {
-      display: none;
+      .time-entries {
+        display: none;
 
-      li {
-        list-style: none;
+        li {
+          list-style: none;
+        }
       }
     }
   }

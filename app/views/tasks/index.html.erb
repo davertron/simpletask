@@ -24,34 +24,36 @@
 <script type="text/html" id="task-template">
     <div class="description">
       {{= description }}
+      {{ if(archived){ }}
+        <div class="actions">
+          <a href="#" class="btn btn-info btn-small unarchive-link"><i class="icon-share"></i>&nbsp;Unarchive</a>
+        </div>
+      {{ } else { }}
+        <div class="actions btn-group">
+          <a href="#" class="btn btn-small log-link {{= logButtonClass }}">
+            <i class="icon-time"></i>&nbsp;<span class="log-button-text">{{= logButtonText }}</span>
+          </a>
+          <a href="#" class="btn btn-small log-link-drop {{= logButtonClass }} dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="archive-link"><i class="icon-inbox"></i>&nbsp;Archive</a></li>
+            <li><a href="#" class="delete-link"><i class="icon-remove"></i>&nbsp;Delete</a></li>
+          </ul>
+        </div>
+      {{ } }}
     </div>
-    <div class="duration-today">
-      {{= duration_today }}
-    </div>
-    <div class="duration">
-      {{= duration }}
-    </div>
-    {{ if(archived){ }}
-      <div class="actions">
-        <a href="#" class="btn btn-info btn-small unarchive-link"><i class="icon-share"></i>&nbsp;Unarchive</a>
+    <div class="task-body">
+      <div class="duration-today">
+        {{= duration_today }}
       </div>
-    {{ } else { }}
-      <div class="actions btn-group">
-        <a href="#" class="btn btn-small log-link {{= logButtonClass }}">
-          <i class="icon-time"></i>&nbsp;<span class="log-button-text">{{= logButtonText }}</span>
-        </a>
-        <a href="#" class="btn btn-small log-link-drop {{= logButtonClass }} dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#" class="archive-link"><i class="icon-inbox"></i>&nbsp;Archive</a></li>
-          <li><a href="#" class="delete-link"><i class="icon-remove"></i>&nbsp;Delete</a></li>
-        </ul>
+      <div class="duration">
+        {{= duration }}
       </div>
-    {{ } }}
-    <div>
-      <a href="#" class="toggle-time-entries">Time Entries</a>
-      <ul class="time-entries"></ul>
+      <div>
+        <a href="#" class="toggle-time-entries">Time Entries</a>
+        <ul class="time-entries"></ul>
+      </div>
     </div>
 </script>
 
