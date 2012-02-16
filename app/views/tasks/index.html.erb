@@ -6,7 +6,7 @@
   <% end %>
 </div>
 
-<a id="toggle-archived-visibility" href="#" class="btn btn-small" data-toggle="button">Show Archived Tasks</a>
+<a id="toggle-archived-visibility" href="#" class="btn btn-small" data-toggle="button" data-original-title="Show/Hide Archived Tasks"><i class="icon-inbox"></i></a>
 
 <ul id="tasks">
   <% @tasks.each_with_index do |task, i| %>
@@ -57,9 +57,9 @@
 
 <script type="text/html" id="time-entry-template">
     <li class="time-entry">
-      Start: {{= startDate }}
+      {{= startDate }}
       {{ if(endDate){ }}
-        End: {{= endDate }}
+        &nbsp;&ndash;&nbsp; {{= endDate }}
         <a href="#" class="edit-entry">Edit</a>
         <a href="#" class="delete-entry">Delete</a>
       {{ } }}

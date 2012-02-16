@@ -5,4 +5,7 @@
 # TODO: Move to its own file
 
 $ ->
-    $('.btn').button()
+    $('#toggle-archived-visibility').button().tooltip({
+        placement: 'bottom'
+    })
+
