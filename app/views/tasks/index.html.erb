@@ -6,7 +6,7 @@
   <% end %>
 </div>
 
-<a id="toggle-archived-visibility" href="#"><% if @showArchived %>Hide<% else %>Show<% end %> Archived Tasks</a>
+<a id="toggle-archived-visibility" href="#" class="btn btn-small" data-toggle="button">Show Archived Tasks</a>
 
 <ul id="tasks">
   <% @tasks.each_with_index do |task, i| %>

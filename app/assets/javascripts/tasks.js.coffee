@@ -5,3 +5,4 @@
 # TODO: Move to its own file
 
 $ ->
+    $('.btn').button()

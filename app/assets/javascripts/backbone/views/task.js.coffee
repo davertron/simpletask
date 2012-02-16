@@ -154,10 +154,6 @@ window.TasksView = Backbone.View.extend
 
     render: ->
         $('#tasks').html ''
-        if this.showArchived
-            $('#toggle-archived-visibility').html('Hide Archived Tasks')
-        else
-            $('#toggle-archived-visibility').html('Show Archived Tasks')
 
         this.collection.forEach (task) =>
             if this.showArchived or not task.get 'archived'
@@ -178,3 +174,5 @@ window.TasksView = Backbone.View.extend
     toggleArchived: ->
         this.showArchived = !this.showArchived
         this.render()
+
+        return false
