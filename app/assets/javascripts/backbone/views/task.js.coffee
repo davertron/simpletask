@@ -66,7 +66,7 @@ window.TaskView = Backbone.View.extend
         if duration_string == ''
             duration_string = 'No time logged'
 
-        return duration_string
+        duration_string
 
     getLogButtonText: ->
         text
@@ -78,7 +78,7 @@ window.TaskView = Backbone.View.extend
         text
 
     getLogButtonClass: ->
-        return if this.isLogging then 'btn-danger' else 'btn-success'
+        if this.isLogging then 'btn-danger' else 'btn-success'
 
     renderTimeEntries: ->
         self = this
@@ -114,25 +114,25 @@ window.TaskView = Backbone.View.extend
         this.model.save()
         this.renderTimeEntries()
 
-        true
+        false
 
     delete: ->
         this.model.destroy()
-        return false
+        false
 
     archive: ->
         this.model.set({archived: true})
         this.model.save()
         this.parent.render()
 
-        return false
+        false
 
     unarchive: ->
         this.model.set({archived: false})
         this.model.save()
         this.parent.render()
 
-        return false
+        false
 
     remove: ->
         $(this.el).remove()
@@ -140,7 +140,7 @@ window.TaskView = Backbone.View.extend
     toggleTimeEntries: ->
         this.$('.time-entries').toggle()
 
-        return false
+        false
 
 window.TasksView = Backbone.View.extend
     events:
@@ -166,7 +166,7 @@ window.TasksView = Backbone.View.extend
         this.collection.create {description: description}
         this.description.val('')
 
-        return false
+        false
 
     addOne: (task) ->
         view = new TaskView {model: task, parent: this}
@@ -177,4 +177,4 @@ window.TasksView = Backbone.View.extend
         this.showArchived = !this.showArchived
         this.render()
 
-        return false
+        false
