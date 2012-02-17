@@ -140,6 +140,8 @@ window.TaskView = Backbone.View.extend
     toggleTimeEntries: ->
         this.$('.time-entries').toggle()
 
+        return false
+
 window.TasksView = Backbone.View.extend
     events:
         'click #create-task': 'addTask'
