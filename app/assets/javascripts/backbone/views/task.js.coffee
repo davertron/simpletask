@@ -7,7 +7,7 @@ window.TaskView = Backbone.View.extend
         'click .archive-link': 'archive',
         'click .unarchive-link': 'unarchive',
         'click .log-link': 'log'
-        'click .toggle-time-entries': 'toggleTimeEntries'
+        'click .show-time-entries': 'showTimeEntries'
 
     initialize: ->
         this.parent = this.options.parent
@@ -82,10 +82,10 @@ window.TaskView = Backbone.View.extend
 
     renderTimeEntries: ->
         self = this
-        self.$('.time-entries').html ''
+        $('#time-entries tbody').html ''
         _.each(self.model.get('time_entries'), (entry) ->
             tView = new TimeEntryView({model: entry, parent: self})
-            self.$('.time-entries').append tView.render().el
+            $('#time-entries tbody').append tView.render().el
         )
 
     render: ->
@@ -96,7 +96,6 @@ window.TaskView = Backbone.View.extend
         model_obj.logButtonText = self.getLogButtonText()
         model_obj.logButtonClass = self.getLogButtonClass()
         $(self.el).html(self.template(model_obj))
-        self.renderTimeEntries()
         self
 
     log: ->
@@ -112,7 +111,6 @@ window.TaskView = Backbone.View.extend
         this.$('.log-button-text').html this.getLogButtonText()
         this.$('.btn.log-link, .btn.log-link-drop').removeClass('btn-success').removeClass('btn-danger').addClass this.getLogButtonClass()
         this.model.save()
-        this.renderTimeEntries()
 
         false
 
@@ -137,8 +135,9 @@ window.TaskView = Backbone.View.extend
     remove: ->
         $(this.el).remove()
 
-    toggleTimeEntries: ->
-        this.$('.time-entries').toggle()
+    showTimeEntries: ->
+        this.renderTimeEntries()
+        $('#time-entry-modal').modal()
 
         false
 

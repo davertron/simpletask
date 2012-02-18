@@ -7,6 +7,18 @@
   margin: auto;
 }
 
+#time-entry-modal {
+  .modal-body {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  #time-entries {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
 #tasks {
   width: 80%;
   margin: auto;
@@ -32,14 +44,6 @@
     .task-body {
       background-color: white;
       padding: 10px;
-
-      .time-entries {
-        display: none;
-
-        li {
-          list-style: none;
-        }
-      }
     }
   }
 }

@@ -1,6 +1,5 @@
 window.TimeEntryView = Backbone.View.extend
-    tagName: 'li'
-    className: 'time-entry'
+    tagName: 'tr'
 
     events:
         'click .edit-entry': 'edit'
@@ -41,8 +40,7 @@ window.TimeEntryView = Backbone.View.extend
         this.parent.model.save()
 
 window.EditableTimeEntryView = Backbone.View.extend
-    tagName: 'li'
-    className: 'time-entry-edit'
+    tagName: 'tr'
 
     events:
         'click .save-edit-entry': 'save'
