@@ -84,7 +84,7 @@ window.TaskView = Backbone.View.extend
         self = this
         $('#time-entries tbody').html ''
         _.each(self.model.get('time_entries'), (entry) ->
-            tView = new TimeEntryView({model: entry, parent: self})
+            tView = new TimeEntryView({model: entry, task: self})
             $('#time-entries tbody').append tView.render().el
         )
 
@@ -137,6 +137,7 @@ window.TaskView = Backbone.View.extend
 
     showTimeEntries: ->
         this.renderTimeEntries()
+        $('#new-time-entry-wrapper').html((new NewTimeEntryView({task: this})).render().el)
         $('#time-entry-modal').modal()
 
         false

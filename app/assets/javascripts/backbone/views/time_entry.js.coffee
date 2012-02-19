@@ -1,3 +1,39 @@
+window.NewTimeEntryView = Backbone.View.extend
+    events:
+        'click #save-new-time-entry': 'saveNewEntry'
+
+    initialize: ->
+        this.template = _.template($('#new-time-entry-template').html())
+        this.task = this.options.task
+        this.timeRegex = /[0-9]{1,2}[\/\-][0-9]{1,2}[\/\-][0-9]{4}\s+[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}/
+
+        _.bindAll(this)
+
+    render: ->
+        $(this.el).html(this.template())
+        this
+
+    saveNewEntry: ->
+        $startInput = $('#new-time-entry-start')
+        $endInput = $('#new-time-entry-end')
+        start = $startInput.val()
+        end = $endInput.val()
+
+        if this.timeRegex.test(start) and this.timeRegex.test(end)
+            this.task.model.get('time_entries').push({startDate: (new Date(start)).toISOString(), endDate: (new Date(end)).toISOString()})
+            this.task.model.save()
+            this.task.render()
+            this.task.renderTimeEntries()
+
+            $startInput.val('')
+            $endInput.val('')
+        else
+            console.log 'Bad time formats'
+            #displayBadTimeEntries()
+
+        return false
+
+
 window.TimeEntryView = Backbone.View.extend
     tagName: 'tr'
 
@@ -7,7 +43,7 @@ window.TimeEntryView = Backbone.View.extend
 
     initialize: ->
         this.template = _.template($('#time-entry-template').html())
-        this.parent = this.options.parent
+        this.task = this.options.task
 
         _.bindAll(this)
 
@@ -31,13 +67,14 @@ window.TimeEntryView = Backbone.View.extend
         this
 
     edit: ->
-        $(this.el).replaceWith(new EditableTimeEntryView({model: this.model, parent: this.options.parent}).render().el)
+        $(this.el).replaceWith(new EditableTimeEntryView({model: this.model, task: this.options.task}).render().el)
 
     delete: ->
         self = this
-        new_entries = _.filter(this.parent.model.get('time_entries'), (entry) -> entry.id != self.model.id)
-        this.parent.model.set({'time_entries': new_entries })
-        this.parent.model.save()
+        new_entries = _.filter(this.task.model.get('time_entries'), (entry) -> entry.id != self.model.id)
+        this.task.model.set({'time_entries': new_entries })
+        this.task.model.save()
+        this.task.renderTimeEntries()
 
 window.EditableTimeEntryView = Backbone.View.extend
     tagName: 'tr'
@@ -48,7 +85,7 @@ window.EditableTimeEntryView = Backbone.View.extend
 
     initialize: ->
         this.template = _.template($('#time-entry-edit-template').html())
-        this.parent = this.options.parent
+        this.task = this.options.task
 
     render: ->
         start = new Date this.model.startDate
@@ -89,8 +126,8 @@ window.EditableTimeEntryView = Backbone.View.extend
         newStart = new Date(newStartYear, newStartMonth-1, newStartDay, newStartHour, newStartMinute, newStartSecond)
         newEnd = new Date(newEndYear, newEndMonth-1, newEndDay, newEndHour, newEndMinute, newEndSecond)
 
-        this.parent.model.get('time_entries').splice(_.indexOf(this.parent.model.get('time_entries'), this.model), 1, {startDate: newStart.toISOString(), endDate: newEnd.toISOString()})
+        this.task.model.get('time_entries').splice(_.indexOf(this.task.model.get('time_entries'), this.model), 1, {startDate: newStart.toISOString(), endDate: newEnd.toISOString()})
 
-        this.parent.model.save()
-        this.parent.render()
+        this.task.model.save()
+        this.task.render()
 
