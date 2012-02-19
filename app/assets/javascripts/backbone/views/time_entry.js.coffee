@@ -67,7 +67,9 @@ window.TimeEntryView = Backbone.View.extend
         this
 
     edit: ->
-        $(this.el).replaceWith(new EditableTimeEntryView({model: this.model, task: this.options.task}).render().el)
+        $(this.el).replaceWith(new EditableTimeEntryView({model: this.model, task: this.options.task, timeView: this}).render().el)
+
+        return false
 
     delete: ->
         self = this
@@ -81,53 +83,35 @@ window.EditableTimeEntryView = Backbone.View.extend
 
     events:
         'click .save-edit-entry': 'save'
-        #'click .cancel-edit-entry': 'cancel'
+        'click .cancel-edit-entry': 'cancel'
 
     initialize: ->
         this.template = _.template($('#time-entry-edit-template').html())
         this.task = this.options.task
+        this.timeView = this.options.timeView
 
     render: ->
         start = new Date this.model.startDate
         end = new Date this.model.endDate
         $(this.el).html(this.template(
-            startDate:
-                month: start.getMonth() + 1
-                day: start.getDate()
-                year: start.getFullYear()
-                hour: _.zeroFill(start.getHours(), 2)
-                minute: _.zeroFill(start.getMinutes(), 2)
-                second: _.zeroFill(start.getSeconds(), 2)
-            endDate:
-                month: end.getMonth() + 1
-                day: end.getDate()
-                year: end.getFullYear()
-                hour: _.zeroFill(end.getHours(), 2)
-                minute: _.zeroFill(end.getMinutes(), 2)
-                second: _.zeroFill(end.getSeconds(), 2)
+            startDate: this.timeView.formatDate(start)
+            endDate: this.timeView.formatDate(end)
         ))
         this
 
     save: ->
-        newStartDay = this.$('.edit-start-day').val()
-        newStartMonth = this.$('.edit-start-month').val()
-        newStartYear = this.$('.edit-start-year').val()
-        newStartHour = this.$('.edit-start-hour').val()
-        newStartMinute = this.$('.edit-start-minute').val()
-        newStartSecond = this.$('.edit-start-second').val()
+        newStart = this.$('.edit-start').val()
+        newEnd = this.$('.edit-end').val()
 
-        newEndDay = this.$('.edit-end-day').val()
-        newEndMonth = this.$('.edit-end-month').val()
-        newEndYear = this.$('.edit-end-year').val()
-        newEndHour = this.$('.edit-end-hour').val()
-        newEndMinute = this.$('.edit-end-minute').val()
-        newEndSecond = this.$('.edit-end-second').val()
-
-        newStart = new Date(newStartYear, newStartMonth-1, newStartDay, newStartHour, newStartMinute, newStartSecond)
-        newEnd = new Date(newEndYear, newEndMonth-1, newEndDay, newEndHour, newEndMinute, newEndSecond)
+        newStart = new Date(newStart)
+        newEnd = new Date(newEnd)
 
         this.task.model.get('time_entries').splice(_.indexOf(this.task.model.get('time_entries'), this.model), 1, {startDate: newStart.toISOString(), endDate: newEnd.toISOString()})
 
         this.task.model.save()
+        this.task.renderTimeEntries()
         this.task.render()
+
+    cancel: ->
+        this.task.renderTimeEntries()
 

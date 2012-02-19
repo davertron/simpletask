@@ -106,20 +106,10 @@
 
 <script type="text/html" id="time-entry-edit-template">
     <td>
-      <input type="text" value="{{= startDate.month }}" size="2" maxlength="2" style="width: auto" class="edit-start-month" />
-      <input type="text" value="{{= startDate.day }}"  size="2" maxlength="2" style="width: auto" class="edit-start-day" />
-      <input type="text" value="{{= startDate.year }}" size="4" maxlength="4" style="width: auto"  class="edit-start-year" />
-      <input type="text" value="{{= startDate.hour }}" size="2" maxlength="2" style="width: auto"  class="edit-start-hour" />
-      <input type="text" value="{{= startDate.minute }}" size="2" maxlength="2" style="width: auto"  class="edit-start-minute" />
-      <input type="text" value="{{= startDate.second }}" size="2" maxlength="2" style="width: auto"  class="edit-start-second" />
+      <input type="text" value="{{= startDate }}" size="20" class="edit-start" />
     </td>
     <td>
-      <input type="text" value="{{= endDate.month }}" size="2" maxlength="2" style="width: auto"  class="edit-end-month" />
-      <input type="text" value="{{= endDate.day }}" size="2" maxlength="2" style="width: auto"  class="edit-end-day" />
-      <input type="text" value="{{= endDate.year }}" size="4" maxlength="4" style="width: auto"  class="edit-end-year" />
-      <input type="text" value="{{= endDate.hour }}" size="2" maxlength="2" style="width: auto"  class="edit-end-hour" />
-      <input type="text" value="{{= endDate.minute }}" size="2" maxlength="2" style="width: auto"  class="edit-end-minute" />
-      <input type="text" value="{{= endDate.second }}" size="2" maxlength="2" style="width: auto"  class="edit-end-second" />
+      <input type="text" value="{{= endDate }}" size="20" class="edit-end" />
     </td>
     <td>
       <a href="#" class="save-edit-entry">Save</a>
