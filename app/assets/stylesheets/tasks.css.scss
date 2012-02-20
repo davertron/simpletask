@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#form-wrapper {
-  width: 80%;
-  margin: auto;
+#page-content {
+  position: relative;
+  margin: 0 30px;
 }
 
 #time-entry-modal {
@@ -20,7 +20,6 @@
 }
 
 #tasks {
-  width: 80%;
   margin: auto;
 
   .task {
@@ -54,6 +53,6 @@
 
 #toggle-archived-visibility {
   position: absolute;
-  right: 100px;
+  right: 0;
   top: 0;
 }

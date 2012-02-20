@@ -10,6 +10,8 @@ gem 'sqlite3'
 gem 'mongo_mapper', '= 0.11.0'
 gem 'bson_ext', '>= 1.5.2'
 
+gem 'sorcery'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

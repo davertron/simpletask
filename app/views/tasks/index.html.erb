@@ -1,8 +1,8 @@
 <div id="form-wrapper">
   <%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
-    <%= f.text_field :description, :placeholder => 'Description' %>
+    <%= f.text_field :description, :placeholder => 'Task' %>
 
-    <%= f.submit :class => 'btn btn-primary', :id => 'create-task' %>
+    <%= f.submit :class => 'btn btn-primary', :id => 'create-task', :value => 'Create' %>
   <% end %>
 </div>
 

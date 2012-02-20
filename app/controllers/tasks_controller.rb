@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_filter :require_login
+
   def index
-    @tasks = Task.all
+    @tasks = Task.where :user_id => current_user.id
     @task = Task.new
     @showArchived = if params[:show_archived] then true else false end
 
