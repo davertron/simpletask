@@ -40,8 +40,13 @@
       }
 
       .actions {
+        font-size: 14px;
         float: right;
         margin-top: -5px;
+        
+        a {
+          text-decoration: none;
+        }
       }
     }
 
