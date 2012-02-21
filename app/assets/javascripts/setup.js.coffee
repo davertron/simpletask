@@ -8,4 +8,5 @@ _.mixin
 
 $ ->
     $('.dropdown-toggle').dropdown()
+    $('.alert').alert()
 
