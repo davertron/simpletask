@@ -36,6 +36,6 @@
     </div>
   </div>
   <div class="actions form-actions">
-    <%= f.submit :class => 'btn', :value => 'Update' %>
+    <%= f.submit :class => 'btn', :value =>  params[:action] == "new" ? 'Register' : 'Update' %>
   </div>
 <% end %>
