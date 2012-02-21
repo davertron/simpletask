@@ -1,8 +1,6 @@
 Timetrack::Application.routes.draw do
   get "user_sessions/new"
-
   get "user_sessions/create"
-
   get "user_sessions/destroy"
 
   resources :users
@@ -10,6 +8,7 @@ Timetrack::Application.routes.draw do
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'register' => 'users#new', :as => :register
 
   root :to => 'tasks#index'
 

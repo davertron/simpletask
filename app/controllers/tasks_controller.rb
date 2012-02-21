@@ -13,6 +13,8 @@ class TasksController < ApplicationController
   end
 
   def create
+    # Tack our user id on there
+    params[:task][:user_id] = current_user.id
     if @task = Task.create(params[:task])
       respond_to do |format|
         format.html { 

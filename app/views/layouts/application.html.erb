@@ -14,13 +14,15 @@
       <div class="navbar-inner">
         <div class="container">
           <a href="/" class="brand"><i class="icon-list-alt"></i>SimpleTask</a>
-          <% if current_user %>
-            <%= link_to 'Profile', edit_user_path(current_user.id) %>
-            <%= link_to 'Logout', :logout %>
-          <% else %>
-            <%= link_to 'Register', new_user_path %> |
-            <%= link_to 'Login', :login %>
-          <% end %>
+          <div class="user-info">
+            <% if current_user %>
+              <%= link_to current_user.username, edit_user_path(current_user.id) %> |
+              <%= link_to 'Logout', :logout %>
+            <% else %>
+              <%= link_to 'Register', :register %> |
+              <%= link_to 'Login', :login %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

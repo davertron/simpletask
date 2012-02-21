@@ -116,6 +116,7 @@ window.TaskView = Backbone.View.extend
 
     delete: ->
         this.model.destroy()
+        this.parent.render()
         false
 
     archive: ->
@@ -154,16 +155,30 @@ window.TasksView = Backbone.View.extend
 
         this.collection.bind 'add', this.addOne, this
 
-    render: ->
-        $('#tasks').html ''
+    renderHasTasks: ->
+        noTasks = $('#no-tasks')
 
-        this.collection.forEach (task) =>
-            if this.showArchived or not task.get 'archived'
-                this.addOne task
+        if this.collection.length > 0
+            if this.showArchived or this.collection.hasAtLeastOneUnarchivedTask()
+                noTasks.hide()
+            else
+                noTasks.show()
+        else
+            noTasks.show()
+
+    render: ->
+        $('#tasks').html('')
+
+        if this.collection.length > 0
+            this.collection.forEach (task) =>
+                if this.showArchived or not task.get 'archived'
+                    this.addOne task
+
+        this.renderHasTasks()
 
     addTask: ->
         description = this.description.val()
-        this.collection.create {description: description}
+        this.collection.create {description: description, archived: false}
         this.description.val('')
 
         false
@@ -172,6 +187,7 @@ window.TasksView = Backbone.View.extend
         view = new TaskView {model: task, parent: this}
         html = view.render().el
         $('#tasks').append html
+        this.renderHasTasks()
 
     toggleArchived: ->
         this.showArchived = !this.showArchived

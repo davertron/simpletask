@@ -8,6 +8,8 @@
 
 <a id="toggle-archived-visibility" href="#" class="btn btn-small" data-toggle="button" data-original-title="Show/Hide Archived Tasks"><i class="icon-inbox"></i></a>
 
+<div id="no-tasks" class="hide">No tasks to display.</div>
+
 <ul id="tasks">
   <% @tasks.each_with_index do |task, i| %>
     <li class="task <%= 'even' if i % 2 == 0 %>">
