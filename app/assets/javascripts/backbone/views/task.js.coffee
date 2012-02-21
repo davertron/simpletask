@@ -8,6 +8,9 @@ window.TaskView = Backbone.View.extend
         'click .unarchive-link': 'unarchive',
         'click .log-link': 'log'
         'click .show-time-entries': 'showTimeEntries'
+        'click .description span.editable': 'editDescription'
+        'click .cancel-edit': 'cancelEdit'
+        'click .save-edit': 'saveEdit'
 
     initialize: ->
         this.parent = this.options.parent
@@ -140,6 +143,22 @@ window.TaskView = Backbone.View.extend
         this.renderTimeEntries()
         $('#new-time-entry-wrapper').html((new NewTimeEntryView({task: this})).render().el)
         $('#time-entry-modal').modal()
+
+        false
+
+    editDescription: ->
+        this.$('.description span:first').removeClass('editable').html('<input type="text" value="' + this.model.get('description') + '" />&nbsp;&nbsp;<span class="edit-task-actions"><a href="#" class="save-edit">Save</a> or <a href="#" class="cancel-edit">Cancel</a></span>')
+
+        false
+
+    saveEdit: ->
+        this.model.save({description: this.$('.description input').val()})
+        this.render()
+
+        false
+
+    cancelEdit: ->
+        this.render()
 
         false
 

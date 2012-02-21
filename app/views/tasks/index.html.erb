@@ -55,7 +55,9 @@
 
 <script type="text/html" id="task-template">
     <div class="description">
-      {{= description }}
+      <span class="editable">
+        {{= description }}
+      </span>
       {{ if(archived){ }}
         <div class="actions">
           <a href="#" class="btn btn-info btn-small unarchive-link"><i class="icon-share"></i>&nbsp;Unarchive</a>
