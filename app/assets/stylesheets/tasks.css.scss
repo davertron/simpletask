@@ -21,6 +21,7 @@
 
 #tasks {
   margin: auto;
+  clear: both;
 
   .task {
     min-height: 80px;
@@ -65,8 +66,10 @@
   position: relative;
 }
 
+#form-wrapper {
+  float:left;
+}
+
 #toggle-archived-visibility {
-  position: absolute;
-  right: 0;
-  top: 0;
+  float: right;
 }
