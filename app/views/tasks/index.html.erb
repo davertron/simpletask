@@ -10,7 +10,7 @@
 
 <div id="no-tasks" class="hide">No tasks to display.</div>
 
-<ul id="tasks">
+<ul id="tasks" class="sortable">
   <% @tasks.each_with_index do |task, i| %>
     <li class="task <%= 'even' if i % 2 == 0 %>">
       <span class="description">

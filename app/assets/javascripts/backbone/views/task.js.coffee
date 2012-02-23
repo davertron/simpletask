@@ -21,6 +21,8 @@ window.TaskView = Backbone.View.extend
             !entry.endDate
         )
 
+        this.$el.data('id', this.model.get('id'))
+
         _.bindAll(this)
 
         this.updateDuration()
@@ -39,11 +41,11 @@ window.TaskView = Backbone.View.extend
             seconds = seconds % 86400
 
         if seconds > 3600
-            result.hours = parseInt(seconds / 3600, 10) 
+            result.hours = parseInt(seconds / 3600, 10)
             seconds = seconds % 3600
 
         if seconds > 60
-            result.minutes = parseInt(seconds / 60, 10) 
+            result.minutes = parseInt(seconds / 60, 10)
             seconds = seconds % 60
 
         duration_string = ''
@@ -172,6 +174,9 @@ window.TasksView = Backbone.View.extend
         this.showArchived = this.options.showArchived or false
         $('#task_duration').hide()
 
+        this.collection.comparator = (task) ->
+            task.get('position')
+
         this.collection.bind 'add', this.addOne, this
 
     renderHasTasks: ->
@@ -213,3 +218,10 @@ window.TasksView = Backbone.View.extend
         this.render()
 
         false
+
+    updateSort: ->
+        jQuery('#tasks > li').each((i, task) =>
+            this.collection.get(jQuery(task).data('id')).set({position: i}).save()
+        )
+
+        this.collection.sort()

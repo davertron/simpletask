@@ -9,4 +9,8 @@ _.mixin
 $ ->
     $('.dropdown-toggle').dropdown()
     $('.alert').alert()
+    $('.sortable').sortable({
+        update: (event, ui) ->
+            AppView.updateSort()
+    }).disableSelection()
 
