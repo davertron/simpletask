@@ -7,6 +7,6 @@ class Task
 
   key :description, String
   key :archived, Boolean, :default => false
-  key :position, Integer, :default => 0
+  key :position, Integer, :default => 1000
   timestamps!
 end

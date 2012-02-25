@@ -3,7 +3,7 @@ window.TaskView = Backbone.View.extend
     className: 'task'
 
     events:
-        'click .delete-link': 'delete',
+        'click .delete-link': 'deleteConfirm',
         'click .archive-link': 'archive',
         'click .unarchive-link': 'unarchive',
         'click .log-link': 'log'
@@ -118,6 +118,10 @@ window.TaskView = Backbone.View.extend
         this.model.save()
 
         false
+
+    deleteConfirm: ->
+        if window.confirm "Are you sure?"
+            this.delete()
 
     delete: ->
         this.model.destroy()
