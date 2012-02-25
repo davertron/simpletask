@@ -8,7 +8,7 @@ window.TaskView = Backbone.View.extend
         'click .unarchive-link': 'unarchive',
         'click .log-link': 'log'
         'click .show-time-entries': 'showTimeEntries'
-        'click .description span.editable': 'editDescription'
+        'click .icon-edit': 'editDescription'
         'click .cancel-edit': 'cancelEdit'
         'click .save-edit': 'saveEdit'
 

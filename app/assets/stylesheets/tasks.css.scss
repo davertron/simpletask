@@ -33,6 +33,10 @@
     padding: 10px 0;
     position: relative;
 
+    .icon-edit {
+      cursor: pointer;
+    }
+
     .description {
       font-weight: bold;
       font-size: 120%;
