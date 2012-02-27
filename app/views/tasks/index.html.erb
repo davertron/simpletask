@@ -33,6 +33,7 @@
         <tr>
           <td>Start</td>
           <td>End</td>
+          <td>Duration</td>
           <td></td>
         </tr>
       </thead>
@@ -101,6 +102,9 @@
     {{ if(endDate){ }}
       {{= endDate }}
     {{ } }}
+    </td>
+    <td>
+      {{= duration }}
     </td>
     <td>
     {{ if(endDate){ }}

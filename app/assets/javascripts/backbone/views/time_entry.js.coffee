@@ -62,8 +62,45 @@ window.TimeEntryView = Backbone.View.extend
 
         formattedDate
 
+    formatDuration: (seconds) ->
+        result = {days: 0, hours: 0, minutes: 0}
+
+        if seconds > 86400
+            result.days = parseInt(seconds / 86400, 10)
+            seconds = seconds % 86400
+
+        if seconds > 3600
+            result.hours = parseInt(seconds / 3600, 10)
+            seconds = seconds % 3600
+
+        if seconds > 60
+            result.minutes = parseInt(seconds / 60, 10)
+            seconds = seconds % 60
+
+        duration_string = ''
+
+        if result.days > 0
+            duration_string += result.days + 'd'
+
+        if result.hours > 0
+            duration_string += result.hours + 'h'
+
+        if result.minutes > 0
+            duration_string += result.minutes + 'm'
+
+        if duration_string == ''
+            duration_string = '0m'
+
+        duration_string
+
     render: ->
-        $(this.el).html(this.template({startDate: this.formatDate(this.model.startDate), endDate: this.formatDate(this.model.endDate)}))
+        durationInSeconds = 0
+        if this.model.endDate
+            durationInSeconds = (new Date(this.model.endDate) - new Date(this.model.startDate)) / 1000
+        else
+            durationInSeconds = (new Date() - new Date(this.model.startDate)) / 1000
+
+        $(this.el).html(this.template({startDate: this.formatDate(this.model.startDate), endDate: this.formatDate(this.model.endDate), duration: this.formatDuration(durationInSeconds)}))
         this
 
     edit: ->
