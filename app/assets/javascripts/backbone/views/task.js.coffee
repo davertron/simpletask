@@ -149,6 +149,7 @@ window.TaskView = Backbone.View.extend
         this.renderTimeEntries()
         $('#new-time-entry-wrapper').html((new NewTimeEntryView({task: this})).render().el)
         $('#time-entry-modal').modal()
+        $('#new-time-entry-start, #new-time-entry-end').datetimepicker({timeFormat: 'hh:mm:ss'})
 
         false
 
