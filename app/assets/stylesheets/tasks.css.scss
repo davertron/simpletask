@@ -43,9 +43,18 @@
       background-color: #efefef;
       padding: 12px 10px;
 
+      .sort-handle {
+        margin-top: 4px;
+        cursor: move;
+      }
+
       .edit-task-actions {
         font-size: 14px;
         font-weight: normal;
+      }
+
+      .icon-edit {
+        margin-top: 4px;
       }
 
       .actions {

@@ -12,5 +12,6 @@ $ ->
     $('.sortable').sortable({
         update: (event, ui) ->
             AppView.updateSort()
+        handle: '.sort-handle'
     }).disableSelection()
 
