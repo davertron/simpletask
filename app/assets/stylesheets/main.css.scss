@@ -15,3 +15,25 @@ h1 {
   border-bottom: 1px dotted #444446;
   margin-bottom: 20px;
 }
+
+#page-content {
+  position: relative;
+  margin: 0 30px;
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    width: auto;
+    padding: 0;
+  }
+
+  #page-content {
+    margin: 0;
+  }
+
+  .editable {
+    display: inline-block;
+    max-width: 350px;
+  }
+}

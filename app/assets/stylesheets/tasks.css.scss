@@ -2,11 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#page-content {
-  position: relative;
-  margin: 0 30px;
-}
-
 #time-entry-modal {
   .modal-body {
     max-height: 350px;
@@ -61,7 +56,7 @@
         font-size: 14px;
         float: right;
         margin-top: -5px;
-        
+
         a {
           text-decoration: none;
         }
@@ -89,4 +84,62 @@
 
 #toggle-archived-visibility {
   float: right;
+}
+
+// Landscape phones and down
+@media (max-width: 480px) { 
+  #tasks {
+    clear: both;
+
+    .task {
+      min-height: 80px;
+      list-style: none;
+      padding: 10px 0;
+      position: relative;
+
+      .icon-edit {
+        cursor: pointer;
+      }
+
+      .description {
+        font-weight: bold;
+        font-size: 120%;
+        background-color: #efefef;
+        padding: 12px 10px;
+
+        .sort-handle {
+          margin-top: 4px;
+          cursor: move;
+        }
+
+        .edit-task-actions {
+          font-size: 14px;
+          font-weight: normal;
+        }
+
+        .icon-edit {
+          margin-top: 4px;
+        }
+
+        .actions {
+          font-size: 14px;
+          float: right;
+          margin-top: -5px;
+
+          a {
+            text-decoration: none;
+          }
+
+          i {
+            margin-top: 2px;
+          }
+        }
+      }
+
+      .task-body {
+        background-color: white;
+        padding: 10px;
+      }
+    }
+  }
 }
