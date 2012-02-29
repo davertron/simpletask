@@ -15,17 +15,21 @@ window.TaskView = Backbone.View.extend
     initialize: ->
         this.parent = this.options.parent
         this.template =  _.template($('#task-template').html())
+        this.model.bind 'sync', this.setDomId, this
         this.model.bind 'change', this.render, this
         this.model.bind 'destroy', this.remove, this
         this.isLogging = _.any(this.model.get('time_entries'), (entry) ->
             !entry.endDate
         )
 
-        this.$el.data('id', this.model.get('id'))
+        this.setDomId()
 
         _.bindAll(this)
 
         this.updateDuration()
+
+    setDomId: ->
+        this.$el.data('id', this.model.get('id'))
 
     updateDuration: ->
         if this.isLogging
