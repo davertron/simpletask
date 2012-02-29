@@ -32,9 +32,8 @@ window.TaskView = Backbone.View.extend
         this.$el.data('id', this.model.get('id'))
 
     updateDuration: ->
-        if this.isLogging
-            this.$('.duration').html(this.formatDuration(this.model.getDuration()) + ' total')
-            this.$('.duration-today').html(this.formatDuration(this.model.getDurationToday()) + ' today')
+        this.$('.duration').html(this.formatDuration(this.model.getDuration()) + ' total')
+        this.$('.duration-today').html(this.formatDuration(this.model.getDurationToday()) + ' today')
         setTimeout this.updateDuration, 10000
 
     formatDuration: (seconds) ->
