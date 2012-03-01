@@ -14,25 +14,30 @@ window.NewTimeEntryView = Backbone.View.extend
         this
 
     saveNewEntry: ->
+        this.$('.alert').remove()
         $startInput = $('#new-time-entry-start')
         $endInput = $('#new-time-entry-end')
         start = $startInput.val()
         end = $endInput.val()
 
         if this.timeRegex.test(start) and this.timeRegex.test(end)
-            this.task.model.get('time_entries').push({startDate: (new Date(start)).toISOString(), endDate: (new Date(end)).toISOString()})
-            this.task.model.save()
-            this.task.render()
-            this.task.renderTimeEntries()
+            if new Date(start) - new Date(end) >= 0
+                this.error('Start date must be before end date.')
+            else
+                this.task.model.get('time_entries').push({startDate: (new Date(start)).toISOString(), endDate: (new Date(end)).toISOString()})
+                this.task.model.save()
+                this.task.render()
+                this.task.renderTimeEntries()
 
-            $startInput.val('')
-            $endInput.val('')
+                $startInput.val('')
+                $endInput.val('')
         else
-            console.log 'Bad time formats'
-            #displayBadTimeEntries()
+            this.error('Bad date time format. e.x. 2012-01-01 12:00:00')
 
         return false
 
+    error: (message) ->
+        this.$('#new-time-entry-start').before('<div class="alert alert-error">' + message + '</div>')
 
 window.TimeEntryView = Backbone.View.extend
     tagName: 'tr'
@@ -46,6 +51,8 @@ window.TimeEntryView = Backbone.View.extend
         this.task = this.options.task
 
         _.bindAll(this)
+
+        this.updateDuration()
 
     formatDate: (date) ->
         formattedDate = null
@@ -93,14 +100,21 @@ window.TimeEntryView = Backbone.View.extend
 
         duration_string
 
-    render: ->
+    updateDuration: ->
+        this.$('.duration').html(this.formatDuration(this.getDurationInSeconds()))
+        setTimeout this.updateDuration, 10000
+
+    getDurationInSeconds: ->
         durationInSeconds = 0
         if this.model.endDate
             durationInSeconds = (new Date(this.model.endDate) - new Date(this.model.startDate)) / 1000
         else
             durationInSeconds = (new Date() - new Date(this.model.startDate)) / 1000
 
-        $(this.el).html(this.template({startDate: this.formatDate(this.model.startDate), endDate: this.formatDate(this.model.endDate), duration: this.formatDuration(durationInSeconds)}))
+        durationInSeconds
+
+    render: ->
+        $(this.el).html(this.template({startDate: this.formatDate(this.model.startDate), endDate: this.formatDate(this.model.endDate), duration: this.formatDuration(this.getDurationInSeconds())}))
         this
 
     edit: ->
