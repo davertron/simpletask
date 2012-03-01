@@ -44,7 +44,7 @@ window.TimeEntryView = Backbone.View.extend
 
     events:
         'click .edit-entry': 'edit'
-        'click .delete-entry': 'delete'
+        'click .delete-entry': 'deleteConfirm'
 
     initialize: ->
         this.template = _.template($('#time-entry-template').html())
@@ -121,6 +121,10 @@ window.TimeEntryView = Backbone.View.extend
         $(this.el).replaceWith(new EditableTimeEntryView({model: this.model, task: this.options.task, timeView: this}).render().el)
 
         return false
+
+    deleteConfirm: ->
+        if window.confirm "Are you sure?"
+            this.delete()
 
     delete: ->
         self = this
