@@ -152,6 +152,7 @@ window.EditableTimeEntryView = Backbone.View.extend
             startDate: this.timeView.formatDate(start)
             endDate: this.timeView.formatDate(end)
         ))
+        this.$('.edit-start, .edit-end').datetimepicker({timeFormat: 'hh:mm:ss'})
         this
 
     save: ->
@@ -167,6 +168,10 @@ window.EditableTimeEntryView = Backbone.View.extend
         this.task.renderTimeEntries()
         this.task.render()
 
+        return false
+
     cancel: ->
         this.task.renderTimeEntries()
+
+        return false
 

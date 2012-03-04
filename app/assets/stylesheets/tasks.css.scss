@@ -12,6 +12,10 @@
     max-height: 300px;
     overflow-y: auto;
   }
+
+  .edit-start, .edit-end, #new-time-entry-start, #new-time-entry-end {
+    width: 150px;
+  }
 }
 
 #no-tasks {
