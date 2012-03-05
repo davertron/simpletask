@@ -39,6 +39,9 @@
   padding: 10px 40px;
 
   .links {
+    a {
+      text-decoration: underline;
+    }
     font-size: 16px;
     float: right;
   }
