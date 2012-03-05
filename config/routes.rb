@@ -9,8 +9,9 @@ Timetrack::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'register' => 'users#new', :as => :register
+  match 'about' => 'landing#index', :as => :about
 
-  root :to => 'tasks#index'
+  root :to => 'landing#index'
 
   resources :tasks do
     resources :time_entries

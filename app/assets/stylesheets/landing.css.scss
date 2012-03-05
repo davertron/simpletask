@@ -1,0 +1,45 @@
+// Place all the styles related to the Landing controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.landing-container {
+  text-align: center;
+  padding: 20px;
+
+  .brand {
+    font-size: 30px;
+    text-decoration: none;
+
+    .icon-list-alt {
+      margin-top: 8px;
+    }
+  }
+
+  .main-info {
+    padding: 20px;
+    font-size: 32px;
+
+    em {
+      font-style: normal;
+    }
+
+    .screenshot {
+      width: auto;
+      margin: auto;
+      margin-top: 30px;
+      background-color: white;
+      padding: 10px;
+      display: inline-block;
+      border: 1px solid #ddddd6;
+    }
+  }
+}
+
+.nav {
+  padding: 10px 40px;
+
+  .links {
+    font-size: 16px;
+    float: right;
+  }
+}
