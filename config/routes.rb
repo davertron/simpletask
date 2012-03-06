@@ -16,6 +16,10 @@ Timetrack::Application.routes.draw do
   resources :tasks do
     resources :time_entries
   end
+
+  namespace :admin do
+    resources :dashboard
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,33 @@
+// Place all the styles related to the Admin::Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h3 {
+  border-bottom: 1px solid #ccc;
+}
+
+.stat {
+  width: 225px;
+  float: left;
+  text-align: center;
+  margin: 25px;
+  margin-top: 16px;
+  font-size: 48px;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid #ddd;
+
+  h4 {
+    padding: 8px;
+  }
+
+  div {
+    padding: 30px;
+  }
+}
+
+.tickers {
+  margin: auto;
+  overflow: hidden;
+  width: 837px;
+}

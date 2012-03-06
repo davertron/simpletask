@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to :login
   end
+
+  def requires_admin
+    if !current_user.is_admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
 end
