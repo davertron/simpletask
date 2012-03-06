@@ -1,7 +1,7 @@
 set :use_sudo, false
 
-set :application, "timetrack"
-set :repository,  "git://github.com/davertron/Time-Track.git"
+set :application, "simpletask"
+set :repository,  "git://github.com/davertron/simpletask.git"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -11,7 +11,7 @@ role :app, "davertron.com"                          # This may be the same as yo
 role :db,  "davertron.com", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
-set :deploy_to, "/var/www/rails"
+set :deploy_to, "/var/www/rails/simpletask"
 set :user, "deploy"
 
 # if you're still using the script/reaper helper you will need
