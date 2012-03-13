@@ -4,7 +4,7 @@
     <title>SimpleTask</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" />
-    
+
     <%= stylesheet_link_tag    "application" %>
     <%= csrf_meta_tags %>
   </head>
@@ -16,11 +16,26 @@
       </div>
     </div>
     <div class="landing-container">
-      <a href="/" class="brand"><i class="icon-list-alt"></i>SimpleTask</a>
       <div class="main-info">
+        <p class="brand">
+          <a href="/"><i class="icon-list-alt"></i>SimpleTask</a>
+        </p>
         <em>Keep track of time spent on tasks. Simple.</em>
         <div class="screenshot">
           <%= image_tag "screenshot.png" %>
+        </div>
+      </div>
+      <div id="additional-info">
+        <h3>Features</h3>
+        <ul id="features">
+          <li>Create tasks quickly</li>
+          <li>Start and stop tracking your time with one click.</li>
+          <li>Manually add time and easily edit your logged time.</li>
+          <li>Fast and responsive interface, powered by <%= link_to 'Backbone.js', 'http://documentcloud.github.com/backbone/' %>
+          <li>It's free (as in beer AND <%= link_to 'speech', 'https://github.com/davertron/simpletask' %>)!
+        </ul>
+        <div id="call-to-action">
+          Ready to give it a shot? <%= link_to 'Register Now', :register, :class => 'btn btn-large btn-success' %>
         </div>
       </div>
     </div>

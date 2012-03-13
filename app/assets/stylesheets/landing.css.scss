@@ -2,22 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$img_width: 924px;
+
 .landing-container {
-  text-align: center;
   padding: 20px;
 
-  .brand {
-    font-size: 30px;
-    text-decoration: none;
-
-    .icon-list-alt {
-      margin-top: 8px;
-    }
-  }
-
   .main-info {
+    text-align: center;
     padding: 20px;
     font-size: 32px;
+
+    .brand {
+      margin-bottom: 16px;
+
+      a {
+        text-decoration: none;
+        font-size: 30px;
+
+        .icon-list-alt {
+          margin-top: 14px;
+        }
+      }
+
+    }
 
     em {
       font-style: normal;
@@ -31,6 +38,34 @@
       padding: 10px;
       display: inline-block;
       border: 1px solid #ddddd6;
+    }
+  }
+
+  #additional-info {
+    margin: auto;
+    text-align: left;
+    width: $img_width;
+    font-size: 18px;
+    padding: 20px;
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    #features {
+      margin-bottom: 24px;
+
+      li {
+        padding: 5px;
+      }
+    }
+
+    #call-to-action {
+      margin-top: 40px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
     }
   }
 }
