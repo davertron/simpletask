@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :use_sudo, false
 
 set :application, "simpletask"
