@@ -4,7 +4,7 @@
     <title>SimpleTask</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" />
-    
+
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -14,6 +14,24 @@
       <div class="navbar-inner">
         <div class="container">
           <a href="/" class="brand"><i class="icon-list-alt"></i>SimpleTask</a>
+          <% if current_user and current_user.is_admin %>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li><%= link_to 'Tasks', tasks_path %></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle">Admin<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <%= link_to 'Dashboard', admin_dashboard_index_path %>
+                    </li>
+                    <li>
+                      <%= link_to 'Users', admin_users_path %>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          <% end %>
           <div class="user-info">
             <% if current_user %>
               <%= link_to current_user.username, edit_user_path(current_user.id) %> |

@@ -12,6 +12,7 @@ gem 'bson_ext', '>= 1.5.2'
 
 gem 'sorcery'
 
+gem 'will_paginate', '~> 3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
