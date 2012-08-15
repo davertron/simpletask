@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>E-mail</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.username %></td>
+        <td><%= u.email %></td>
+        <td><%= u.is_admin %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @users %>
