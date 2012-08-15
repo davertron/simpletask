@@ -62,11 +62,18 @@
         margin-top: -5px;
 
         a {
+          position: relative;
           text-decoration: none;
+
+          &.log-link {
+            padding-left: 20px;
+          }
         }
 
         i {
-          margin-top: 2px;
+          position: absolute;
+          left: 6px;
+          top: middle;
         }
       }
     }
