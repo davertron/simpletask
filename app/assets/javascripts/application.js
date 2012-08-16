@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.cookie
 //= require underscore-min
 //= require backbone-min
 //= require_tree ./backbone/models/

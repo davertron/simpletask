@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.where(:user_id => current_user.id).order(:position)
     @task = Task.new
-    @showArchived = if params[:show_archived] then true else false end
+    @showArchived = if cookies[:show_archived] and cookies[:show_archived] == 'true' then true else false end
 
     respond_to do |format|
       format.html

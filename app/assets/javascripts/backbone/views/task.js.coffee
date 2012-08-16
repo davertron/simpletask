@@ -234,6 +234,12 @@ window.TasksView = Backbone.View.extend
 
     toggleArchived: ->
         this.showArchived = !this.showArchived
+        $.cookie 'show_archived', this.showArchived, {expires: 365}
+        if this.showArchived
+            $('#toggle-archived-visibility span').html('Hide Archived')
+        else
+            $('#toggle-archived-visibility span').html('Show Archived')
+
         this.render()
 
         false

@@ -84,6 +84,14 @@
 
 #toggle-archived-visibility {
   float: right;
+  padding-left: 20px;
+  position: relative;
+
+  i {
+    position: absolute;
+    top: middle;
+    left: 5px;
+  }
 }
 
 // Landscape phones and down
