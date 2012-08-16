@@ -32,44 +32,55 @@ window.TaskView = Backbone.View.extend
         this.$el.data('id', this.model.get('id'))
 
     updateDuration: ->
-        this.$('.duration').html(this.formatDuration(this.model.getDuration()) + ' total')
-        this.$('.duration-today').html(this.formatDuration(this.model.getDurationToday()) + ' today')
-        setTimeout this.updateDuration, 10000
+        duration_today = this.model.getDurationToday()
+        total_duration = this.model.getDuration()
+        timeout = 10000
+
+        this.$('.duration').html(this.formatDuration(total_duration) + ' total')
+        this.$('.duration-today').html(this.formatDuration(duration_today) + ' today')
+
+        if duration_today < 60 or total_duration < 60
+            timeout = 1000
+
+        setTimeout this.updateDuration, timeout
 
     formatDuration: (seconds) ->
-        result = {days: 0, hours: 0, minutes: 0}
-
-        if seconds > 86400
-            result.days = parseInt(seconds / 86400, 10)
-            seconds = seconds % 86400
-
-        if seconds > 3600
-            result.hours = parseInt(seconds / 3600, 10)
-            seconds = seconds % 3600
-
-        if seconds > 60
-            result.minutes = parseInt(seconds / 60, 10)
-            seconds = seconds % 60
-
         duration_string = ''
 
-        if result.days > 0
-            if result.days > 1
-                duration_string += result.days + ' days '
-            else
-                duration_string += result.days + ' day '
+        if seconds > 0 and seconds < 60
+            duration_string = seconds + ' seconds'
+        else
+            result = {days: 0, hours: 0, minutes: 0, seconds: 0}
 
-        if result.hours > 0
-            if result.hours > 1
-                duration_string += result.hours + ' hours '
-            else
-                duration_string += result.hours + ' hour '
+            if seconds > 86400
+                result.days = parseInt(seconds / 86400, 10)
+                seconds = seconds % 86400
 
-        if result.minutes > 0
-            if result.minutes > 1
-                duration_string += result.minutes + ' minutes '
-            else
-                duration_string += result.minutes + ' minute '
+            if seconds > 3600
+                result.hours = parseInt(seconds / 3600, 10)
+                seconds = seconds % 3600
+
+            if seconds > 60
+                result.minutes = parseInt(seconds / 60, 10)
+                seconds = seconds % 60
+
+            if result.days > 0
+                if result.days > 1
+                    duration_string += result.days + ' days '
+                else
+                    duration_string += result.days + ' day '
+
+            if result.hours > 0
+                if result.hours > 1
+                    duration_string += result.hours + ' hours '
+                else
+                    duration_string += result.hours + ' hour '
+
+            if result.minutes > 0
+                if result.minutes > 1
+                    duration_string += result.minutes + ' minutes '
+                else
+                    duration_string += result.minutes + ' minute '
 
         if duration_string == ''
             duration_string = 'No time logged'
