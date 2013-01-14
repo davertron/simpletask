@@ -1,5 +1,9 @@
 source 'http://rubygems.org'
 
+# NOTE: Do NOT change versions here and do a bundle install; if you're changing
+# a gem, then do a "bundle update <gem>" instead, to avoid problems with other
+# gems.
+
 gem 'rails', '3.1.10'
 
 # Bundle edge Rails instead:
@@ -7,6 +11,7 @@ gem 'rails', '3.1.10'
 
 gem 'sqlite3'
 
+# NOTE: for some reason mongo 1.8.0 will break and not start in passenger.
 gem "mongo", "~> 1.7.1"
 gem 'mongo_mapper'
 gem 'bson_ext'
