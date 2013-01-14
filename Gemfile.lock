@@ -32,9 +32,9 @@ GEM
     ansi (1.4.3)
     arel (2.2.3)
     bcrypt-ruby (3.0.1)
-    bson (1.8.1)
-    bson_ext (1.8.1)
-      bson (~> 1.8.1)
+    bson (1.7.1)
+    bson_ext (1.7.1)
+      bson (~> 1.7.1)
     builder (3.0.4)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -60,8 +60,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
-    mongo (1.8.1)
-      bson (~> 1.8.1)
+    mongo (1.7.1)
+      bson (~> 1.7.1)
     mongo_mapper (0.11.0)
       activemodel (~> 3.0)
       activesupport (~> 3.0)
@@ -139,6 +139,7 @@ DEPENDENCIES
   bson_ext
   coffee-rails (~> 3.1.0)
   jquery-rails
+  mongo (~> 1.7.1)
   mongo_mapper
   rails (= 3.1.10)
   sass-rails (= 3.1.4)
