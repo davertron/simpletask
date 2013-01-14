@@ -7,7 +7,7 @@ gem 'rails', '3.1.10'
 
 gem 'sqlite3'
 
-gem 'mongo_mapper'
+gem 'mongo_mapper', '= 0.11.0'
 gem 'bson_ext'
 
 gem 'sorcery'
