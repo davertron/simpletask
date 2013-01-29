@@ -1,3 +1,7 @@
+<% if @user %>
+<h3>Tasks for <%= @user.username %></h3><br/>
+<% end %>
+
 <div id="form-wrapper">
   <%= form_for @task, {:html => {:class => 'form-inline'}} do |f| %>
     <%= f.text_field :description, :placeholder => 'Task' %>
@@ -10,18 +14,7 @@
 
 <div id="no-tasks" class="hide">No tasks to display.</div>
 
-<ul id="tasks" class="sortable">
-  <% @tasks.each_with_index do |task, i| %>
-    <li class="task <%= 'even' if i % 2 == 0 %>">
-      <span class="description">
-        <%= task.description %>
-      </span>
-      <span class="actions">
-        <%= link_to 'Delete', task, :method => :delete, :class => 'delete-link' %>
-      </span>
-    </li>
-  <% end %>
-</ul>
+<%= render "shared/task_list" %>
 
 <div id="time-entry-modal" class="modal hide">
   <div class="modal-header">

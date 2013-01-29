@@ -9,7 +9,7 @@
   <tbody>
     <% @users.each do |u| %>
       <tr>
-        <td><%= u.username %></td>
+        <td><%= link_to u.username, admin_user_path(u.id) %></td>
         <td><%= u.email %></td>
         <td><%= u.is_admin %></td>
       </tr>

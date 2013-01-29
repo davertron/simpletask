@@ -1,0 +1,12 @@
+<ul id="tasks" class="sortable">
+  <% @tasks.each_with_index do |task, i| %>
+    <li class="task <%= 'even' if i % 2 == 0 %>">
+      <span class="description">
+        <%= task.description %>
+      </span>
+      <span class="actions">
+        <%= link_to 'Delete', task, :method => :delete, :class => 'delete-link' %>
+      </span>
+    </li>
+  <% end %>
+</ul>
