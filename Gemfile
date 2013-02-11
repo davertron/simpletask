@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 # a gem, then do a "bundle update <gem>" instead, to avoid problems with other
 # gems.
 
-gem 'rails', '3.1.10'
+gem 'rails', '3.1.11'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
