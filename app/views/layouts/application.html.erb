@@ -34,8 +34,13 @@
           <% end %>
           <div class="user-info">
             <% if current_user %>
-              <%= link_to current_user.username, edit_user_path(current_user.id) %> |
-              <%= link_to 'Logout', :logout %>
+              <% if current_user.is_guest %>
+                Guest |
+                <%= link_to 'Register to keep your tasks', :register %>
+              <% else %>
+                <%= link_to current_user.username, edit_user_path(current_user.id) %> |
+                <%= link_to 'Logout', :logout %>
+              <% end %>
             <% else %>
               <%= link_to 'Register', :register %> |
               <%= link_to 'Login', :login %>

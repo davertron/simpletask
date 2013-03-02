@@ -24,6 +24,14 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        if current_user and current_user.is_guest
+          # We have a guest, so make sure we move their tasks over to the new
+          # account
+          current_user.tasks.each do |task|
+            task.user_id = @user.id
+            task.save
+          end
+        end
         login(params[:user][:username], params[:user][:password])
         format.html { redirect_to :root, notice: 'Welcome to SimpleTask' }
         format.json { render json: @user, status: :created, location: @user }

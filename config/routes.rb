@@ -2,6 +2,7 @@ Timetrack::Application.routes.draw do
   get "user_sessions/new"
   get "user_sessions/create"
   get "user_sessions/destroy"
+  post "user_sessions/guest"
 
   resources :users
   resources :user_sessions
@@ -10,6 +11,7 @@ Timetrack::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'register' => 'users#new', :as => :register
   match 'about' => 'landing#index', :as => :about
+  match 'guest' => 'user_sessions#guest', :as => :guest
 
   root :to => 'landing#index'
 
