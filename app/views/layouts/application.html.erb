@@ -51,6 +51,11 @@
     </div>
     <div class="container">
       <div id="page-content">
+        <% if current_user && current_user.is_guest %>
+          <div class="alert alert-info">
+            <strong>Heads Up!</strong> Since you don't have an account these tasks will disappear if you close your browser. <%= link_to 'Register', :register %> to make sure you don't lose your tasks.
+          </div>
+        <% end %>
         <% if notice %>
           <div class="alert alert-success">
             <%= notice %>
